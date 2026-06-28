@@ -6,11 +6,11 @@
 
 *Enter a patient's routine clinical data and get a calibrated CVD-risk score with a per-patient **SHAP** explanation. Powered by an Optuna-tuned **XGBoost** model (ROC-AUC 0.802).*
 
-[![Streamlit](https://img.shields.io/badge/Streamlit-app-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![Live app](https://img.shields.io/badge/▶_Live_app-Streamlit-FF4B4B?logo=streamlit&logoColor=white)](https://hamzaaouni-cardio-cvd-predictor-app-aomrpd.streamlit.app/)
 [![Model](https://img.shields.io/badge/XGBoost-ROC--AUC_0.802-success)](#-model)
 [![License](https://img.shields.io/badge/License-Academic_(PFE_2026)-blue)](#-author)
 
-**[🚀 Deploy on Streamlit Cloud](https://share.streamlit.io/deploy?repository=hamzaaouni/cardio-cvd-predictor&branch=main&mainModule=app.py)** · **[📊 Analytics Dashboard](https://cardio-decision-ml.vercel.app/)** · **[📄 Project & Thesis](https://github.com/hamzaaouni/pfe)**
+**[▶ Live App](https://hamzaaouni-cardio-cvd-predictor-app-aomrpd.streamlit.app/)** · **[🚀 Deploy your own](https://share.streamlit.io/deploy?repository=hamzaaouni/cardio-cvd-predictor&branch=main&mainModule=app.py)** · **[📊 Dashboard](https://cardio-decision-ml.vercel.app/)** · **[📄 Project & Thesis](https://github.com/hamzaaouni/pfe)**
 
 </div>
 
@@ -27,13 +27,13 @@ This is the **standalone, deploy-ready** Streamlit predictor extracted from the 
 
 ## 🎬 Demo scenarios (shareable links)
 
-Once deployed, append `?scenario=` to the URL to pre-load a patient and show the result:
+Append `?scenario=` to the [live URL](https://hamzaaouni-cardio-cvd-predictor-app-aomrpd.streamlit.app/) to pre-load a patient and show the result:
 
 | Link | Patient | Result |
 | :--- | :--- | :---: |
-| `…/?scenario=low` | healthy 35 y/o | 🟢 **7.1 %** |
-| `…/?scenario=moderate` | 54 y/o, elevated BP | 🟡 **64.5 %** |
-| `…/?scenario=high` | 62 y/o, multiple risk factors | 🔴 **81.0 %** |
+| [▶ scenario=low](https://hamzaaouni-cardio-cvd-predictor-app-aomrpd.streamlit.app/?scenario=low) | healthy 35 y/o | 🟢 **7.1 %** |
+| [▶ scenario=moderate](https://hamzaaouni-cardio-cvd-predictor-app-aomrpd.streamlit.app/?scenario=moderate) | 54 y/o, elevated BP | 🟡 **64.5 %** |
+| [▶ scenario=high](https://hamzaaouni-cardio-cvd-predictor-app-aomrpd.streamlit.app/?scenario=high) | 62 y/o, multiple risk factors | 🔴 **81.0 %** |
 
 ## 🚀 Run locally
 
