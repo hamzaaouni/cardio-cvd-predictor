@@ -11,7 +11,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import joblib
-import shap
 import os
 import warnings
 
@@ -137,14 +136,16 @@ def load_results():
 
 @st.cache_resource
 def load_shap_explainer(_model):
-    # leading underscore: tells Streamlit not to hash the (unhashable) model
+    # leading underscore: tells Streamlit not to hash the (unhashable) model.
+    # shap is imported lazily here so the cold-start / wake does not pay the heavy
+    # shap -> numba -> llvmlite import cost until an explanation is actually needed.
+    import shap
     return shap.TreeExplainer(_model)
 
 try:
     model, model_name = load_model()
     feature_cols      = load_feature_cols()
     results_df        = load_results()
-    explainer         = load_shap_explainer(model)
     MODEL_LOADED = True
 except Exception as e:
     MODEL_LOADED = False
@@ -351,6 +352,7 @@ with tab1:
             section("search", "Why This Prediction? (SHAP Explanation)")
 
             try:
+                explainer = load_shap_explainer(model)   # built on first use, then cached
                 shap_vals = explainer.shap_values(features_df)
                 if isinstance(shap_vals, list):
                     sv = shap_vals[1][0]
