@@ -61,6 +61,7 @@ st.markdown("""
     }
     .metric-card .label { color: #64748b; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
     .metric-card .value { color: #1e293b; font-size: 1.6rem; font-weight: 700; margin-top: 0.2rem; }
+    .metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 0.5rem; }
 
     /* Risk badge */
     .risk-low    { background: #DCFCE7; color: #166534; padding: 0.4rem 1.2rem; border-radius: 999px; font-weight: 700; display: inline-block; }
@@ -272,19 +273,18 @@ with tab1:
 
         # ── Computed stats ──────────────────────────────────
         section("clipboard-list", "Computed Patient Metrics")
-        c1, c2, c3, c4 = st.columns(4)
-        with c1:
-            st.markdown(f'<div class="metric-card"><div class="label">BMI</div><div class="value">{bmi:.1f}</div></div>', unsafe_allow_html=True)
-        with c2:
-            st.markdown(f'<div class="metric-card"><div class="label">Pulse Pressure</div><div class="value">{pulse_pressure} mmHg</div></div>', unsafe_allow_html=True)
-        with c3:
-            bp_labels = {0: "Normal", 1: "Elevated", 2: "High Stage 1", 3: "High Stage 2"}
-            bp_val    = features_df["bp_category"].values[0]
-            st.markdown(f'<div class="metric-card"><div class="label">BP Category</div><div class="value">{bp_labels[bp_val]}</div></div>', unsafe_allow_html=True)
-        with c4:
-            bmi_labels = {0: "Underweight", 1: "Normal", 2: "Overweight", 3: "Obese"}
-            bmi_val    = features_df["bmi_category"].values[0]
-            st.markdown(f'<div class="metric-card"><div class="label">BMI Category</div><div class="value">{bmi_labels[bmi_val]}</div></div>', unsafe_allow_html=True)
+        bp_labels  = {0: "Normal", 1: "Elevated", 2: "High Stage 1", 3: "High Stage 2"}
+        bmi_labels = {0: "Underweight", 1: "Normal", 2: "Overweight", 3: "Obese"}
+        bp_val     = int(features_df["bp_category"].values[0])
+        bmi_val    = int(features_df["bmi_category"].values[0])
+        # Responsive CSS grid: 4 cards on wide screens, wrapping to 2 / 1 on narrow
+        # ones. HTML kept flush-left so Streamlit doesn't treat it as a code block.
+        st.markdown(f'''<div class="metric-grid">
+<div class="metric-card"><div class="label">BMI</div><div class="value">{bmi:.1f}</div></div>
+<div class="metric-card"><div class="label">Pulse Pressure</div><div class="value">{pulse_pressure} mmHg</div></div>
+<div class="metric-card"><div class="label">BP Category</div><div class="value">{bp_labels[bp_val]}</div></div>
+<div class="metric-card"><div class="label">BMI Category</div><div class="value">{bmi_labels[bmi_val]}</div></div>
+</div>''', unsafe_allow_html=True)
 
         # ── Prediction ──────────────────────────────────────
         if predict_btn or _p:
